@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get '/login',to:'session#new'
+  post '/login',to:'session#create'
+  delete '/logout',to:'session#destoroy'
+
   resources :users
 
   get '/home', to:'static_pages#home'
