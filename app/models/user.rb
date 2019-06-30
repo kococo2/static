@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  include Gravtastic
+  gravtastic
   attr_accessor :remember_token
   before_save { self.email = email.downcase }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
@@ -12,7 +14,7 @@ class User < ApplicationRecord
    cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
                                                  BCrypt::Engine.cost
    BCrypt::Password.create(string, cost: cost)
- end
+   end
  def User.new_token
    SecureRandom.urlsafe_base64
  end
@@ -29,5 +31,6 @@ class User < ApplicationRecord
     update_attribute(:remember_digest,nil)
 
   end
+
 
 end
