@@ -274,3 +274,14 @@ footer ul li {
   margin-left: 15px;
 
 }
+
+/* Users INdex */
+.users{
+  list-style: none;
+  margin: 0;
+  li{
+    overflow: 0;
+    padding: 10px o;
+    border-bottom: 1px solid $gray-light
+  }
+}

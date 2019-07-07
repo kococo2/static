@@ -1,6 +1,6 @@
 class SessionController < ApplicationController
   def new
-
+    
   end
   def create
     user = User.find_by(email: params[:session][:email].downcase)
@@ -8,10 +8,10 @@ class SessionController < ApplicationController
       #ユーザーログイン後にユーザー情報のページにリダイレクトする
       log_in user
       params[:session][:remember_me] == '1' ? remember_user(user) : forget(user)
-      redirect_to user
+      redirect_back_or user
     else
       #エラーメッセージを作成する
-      flash.now[:danger] = 'inalid email/password combination'
+      flash.now[:danger] = 'invalid email/password combination'
       render 'new'
     end
   end
