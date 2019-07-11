@@ -21,8 +21,8 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
   end
   test "valid signup information" do
     get signup_path
-        assert_difference 'User.count', 1 do
-          post users_path, params: { user: { name:  "Example User",
+      assert_difference 'User.count', 1 do
+       post users_path, params: { user: {    name:  "Example User",
                                              email: "user@example.com",
                                              password:              "password",
                                              password_confirmation: "password" } }
@@ -35,11 +35,10 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
   test "valid signup information with account activation"do
     get signup_path
     assert_difference 'User.count', 1 do
-      post users_path, params:{user:{
-          name:"Example User",
-          email:"usersd2@exaple.com",
-          Password:"password",
-          password_confirmation:"password"}}
+     post users_path, params: { user: {    name:  "Example User",
+                                           email: "user@example.com",
+                                           password:              "password",
+                                           password_confirmation: "password" } }
       end
     assert_equal 1, ActionMailer::Base.deliveries.size
     user = assigns(:user)
@@ -51,9 +50,9 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
     get edit_account_activation_url(user.activation_token,email:"wrong")
     assert_not is_logged_in?
     get edit_account_activation_url(user.activation_token,email:user.email)
-    asset user.reload.activated?
+    assert user.reload.activated?
     follow_redirect!
-    assert_template "user/show"
+    assert_template "users/show"
     assert is_logged_in?
 
   end
